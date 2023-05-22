@@ -30,7 +30,7 @@ export default {
     },
 
     mounted() {
-        this.$parent.$refs.index.brotherMethod();
+        this.$parent.$refs.index.indexLog();
     },
 
     methods: {

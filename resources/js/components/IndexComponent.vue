@@ -59,10 +59,6 @@ export default {
     },
 
     methods: {
-        brotherMethod() {
-            console.log('This is brother method from indexComponent');
-        },
-
         indexLog() {
             console.log('I\'m Index component');
         },
