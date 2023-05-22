@@ -1,31 +1,13 @@
 <template>
     <div>
-        <SinglePostComponent></SinglePostComponent>
         <CreateComponent></CreateComponent>
-<!--        <table class="table">-->
-<!--            <thead>-->
-<!--            <tr>-->
-<!--                <th scope="col">№</th>-->
-<!--                <th scope="col">Name</th>-->
-<!--                <th scope="col">Age</th>-->
-<!--                <th scope="col">Job</th>-->
-<!--            </tr>-->
-<!--            </thead>-->
-<!--            <tbody>-->
-<!--            <tr v-for="(person, index) in persons" :key="person.id">-->
-<!--                <th scope="row">{{ index + 1 }}</th>-->
-<!--                <td>{{ person.name }}</td>-->
-<!--                <td>{{ person.age }}</td>-->
-<!--                <td>{{ person.job }}</td>-->
-<!--            </tr>-->
-<!--            </tbody>-->
-<!--        </table>-->
+        <IndexComponent></IndexComponent>
     </div>
 </template>
 
 <script>
-import SinglePostComponent from "./SinglePostComponent.vue";
 import CreateComponent from "./CreateComponent.vue";
+import IndexComponent from "./IndexComponent.vue";
 
 export default {
     name: "PostComponent",
@@ -46,8 +28,8 @@ export default {
     computed: {},
 
     components: {
-        SinglePostComponent,
         CreateComponent,
+        IndexComponent,
     }
 }
 </script>
