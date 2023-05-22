@@ -29,6 +29,10 @@ export default {
         }
     },
 
+    mounted() {
+        this.$parent.$refs.index.brotherMethod();
+    },
+
     methods: {
         addPerson() {
             axios.post('/api/people', {name: this.name, age: this.age, job: this.job})

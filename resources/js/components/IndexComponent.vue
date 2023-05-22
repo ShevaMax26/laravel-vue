@@ -55,9 +55,18 @@ export default {
 
     mounted() {
         this.getPeople()
+        this.$parent.indexParent()
     },
 
     methods: {
+        brotherMethod() {
+            console.log('This is brother method from indexComponent');
+        },
+
+        indexLog() {
+            console.log('I\'m Index component');
+        },
+
         getPeople() {
             axios.get('/api/people')
                 .then(res => {
