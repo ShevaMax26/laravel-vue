@@ -1,12 +1,23 @@
 <template>
     <div>
-       This is SinglePostComponent
+       <div>Color: {{ obj.color }}</div>
+       <div>Number: {{ obj.number }}</div>
+       <div>Is published: {{ obj.isPublished }}</div>
     </div>
 </template>
 
 <script>
 export default {
-    name: "SinglePostComponent"
+    name: "SinglePostComponent",
+
+    data() {
+        return {
+        }
+    },
+
+    props: [
+        'obj'
+    ],
 }
 </script>
 

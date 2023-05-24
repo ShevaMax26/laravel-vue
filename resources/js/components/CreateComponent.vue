@@ -14,9 +14,12 @@
         </div>
         <button @click.prevent="addPerson" class="btn btn-success">Create</button>
     </div>
+    <SinglePostComponent :obj="obj"></SinglePostComponent>
 </template>
 
 <script>
+
+import SinglePostComponent from "./SinglePostComponent.vue";
 
 export default {
     name: "CreateComponent",
@@ -26,22 +29,33 @@ export default {
             name: null,
             age: null,
             job: null,
+            obj: {
+                color: 'red',
+                number: 12,
+                isPublished: true,
+            }
         }
     },
 
     mounted() {
-        this.$parent.$refs.index.indexLog();
+
     },
 
     methods: {
         addPerson() {
             axios.post('/api/people', {name: this.name, age: this.age, job: this.job})
                 .then(res => {
-                    this.name = null;
-                    this.age = null;
-                    this.job = null;
+                    this.name = null
+                    this.age = null
+                    this.job = null
+                    this.$parent.$refs.index.getPeople();
+
                 });
         },
+    },
+
+    components: {
+        SinglePostComponent,
     },
 }
 </script>

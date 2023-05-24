@@ -19,7 +19,6 @@ export default {
     },
 
     mounted() {
-        this.$refs.index.indexLog();
 
     },
 

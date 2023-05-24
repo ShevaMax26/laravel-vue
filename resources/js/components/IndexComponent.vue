@@ -12,26 +12,8 @@
             </thead>
             <tbody>
             <template v-for="(person, index) in people" :key="person.id">
-                <tr :class="isEdit(person.id) ? 'd-none' : ''">
-                    <th scope="row">{{ index + 1 }}</th>
-                    <td>{{ person.name }}</td>
-                    <td>{{ person.age }}</td>
-                    <td>{{ person.job }}</td>
-                    <td>
-                        <a href="#" @click.prevent="changeEditPersonId(person.id, person.name, person.age, person.job)" class="btn btn-warning me-2">Edit</a>
-                        <a href="#" @click.prevent="deletePerson(person.id)" class="btn btn-danger">Delete</a>
-                    </td>
-                </tr>
-                <tr :class="isEdit(person.id) ? '' : 'd-none'">
-                    <th scope="row">{{ index + 1 }}</th>
-                    <td><input type="text" v-model="name" name="name" class="form-control"></td>
-                    <td><input type="number" v-model="age" name="age" class="form-control"></td>
-                    <td><input type="text" v-model="job" name="job" class="form-control"></td>
-                    <td>
-                        <a href="#" @click.prevent="updatePerson(person.id)" class="btn btn-success">Update</a>
-                        <a href="#" @click.prevent="updatePerson(null)" class="btn btn-danger ms-2">X</a>
-                    </td>
-                </tr>
+                <ShowComponent :person="person" :index="index" :ref="`show_${person.id}`"></ShowComponent>
+                <EditComponent :person="person" :index="index" :ref="`edit_${person.id}`"></EditComponent>
             </template>
             </tbody>
         </table>
@@ -39,6 +21,9 @@
 </template>
 
 <script>
+
+import EditComponent from "./EditComponent.vue";
+import ShowComponent from "./ShowComponent.vue";
 
 export default {
     name: "IndexComponent",
@@ -55,14 +40,9 @@ export default {
 
     mounted() {
         this.getPeople()
-        this.$parent.indexParent()
     },
 
     methods: {
-        indexLog() {
-            console.log('I\'m Index component');
-        },
-
         getPeople() {
             axios.get('/api/people')
                 .then(res => {
@@ -87,15 +67,22 @@ export default {
 
         changeEditPersonId(id, name, age, job) {
             this.editPersonId = id
-            this.name = name
-            this.age = age
-            this.job = job
+            let editName = `edit_${id}`
+            let fullEditName = this.$refs[editName][0]
+            fullEditName.name = name
+            fullEditName.age = age
+            fullEditName.job = job
         },
 
         isEdit(id) {
             return this.editPersonId === id;
         },
     },
+
+    components: {
+        EditComponent,
+        ShowComponent,
+    }
 }
 </script>
 
