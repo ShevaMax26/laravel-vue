@@ -1,18 +1,26 @@
 import { createRouter, createWebHistory} from 'vue-router'
-import PostsIndex from "../components/Posts/Index.vue"
-import PostsCreate from "../components/Posts/Create.vue"
 
 const routes = [
     {
-        path: '/posts',
-        name: 'posts.index',
-        component: PostsIndex,
+        path: '/people',
+        name: 'person.index',
+        component: () => import('../components/Person/Index.vue'),
     },
     {
-        path: '/posts/create',
-        name: 'posts.create',
-        component: PostsCreate,
-    }
+        path: '/people/create',
+        name: 'person.create',
+        component: () => import('../components/Person/Create.vue'),
+    },
+    {
+        path: '/people/:id/edit',
+        name: 'person.edit',
+        component: () => import('../components/Person/Edit.vue'),
+    },
+    {
+        path: '/people/:id',
+        name: 'person.show',
+        component: () => import('../components/Person/Show.vue'),
+    },
 ]
 
 export default createRouter({
