@@ -1,9 +1,9 @@
 import './bootstrap';
 import { createApp } from 'vue'
-import { createRouter, createWebHistory} from 'vue-router'
-import PostsIndex from "./components/Posts/Index.vue"
+import App from './App.vue';
+import router from './routes/index'
 
-
-createApp({})
-    .component('PostsIndex', PostsIndex)
+createApp(App)
+    .use(router)
     .mount('#app')
+
