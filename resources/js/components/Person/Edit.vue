@@ -13,14 +13,12 @@
             <router-link :to="{ name: 'person.index'}" class="me-3">
                 <button class="btn btn-primary">Back</button>
             </router-link>
-            <input @click.prevent="update" type="submit" value="Update" class="btn btn-warning me-2">
+            <input :disabled="!isDisabled" @click.prevent="update" type="submit" value="Update" class="btn btn-warning me-2">
         </div>
     </div>
 </template>
 
 <script>
-import routes from "../../routes";
-
 export default {
     name: "PersonEdit",
 
@@ -38,20 +36,26 @@ export default {
 
     methods: {
         getPerson() {
-            axios.get('/api/people/' + this.$route.params.id)
+            axios.get(`/api/people/${this.$route.params.id}`)
                 .then(res => {
-                    this.name = res.data.name
-                    this.age = res.data.age
-                    this.job = res.data.job
+                    this.name = res.data.data.name
+                    this.age = res.data.data.age
+                    this.job = res.data.data.job
                 })
         },
 
         update() {
-            axios.patch('/api/people/' + this.$route.params.id, {name: this.name, age: this.age, job: this.job})
+            axios.patch(`/api/people/${this.$route.params.id}`, {name: this.name, age: this.age, job: this.job})
                 .then(res => {
-                    routes.push({name: 'person.show', params: {id: this.$route.params.id}})
+                    this.$router.push({name: 'person.show', params: {id: this.$route.params.id}})
                 })
         },
+    },
+
+    computed: {
+        isDisabled() {
+            return this.name && this.age && this.job
+        }
     },
 }
 </script>
